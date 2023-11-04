@@ -11,7 +11,7 @@ function sayHi()
 {
  console.log("Hi")
 }
-//Called sayHI function
+//Called sayHi function
 sayHi();
 
 //Created sum function
@@ -31,12 +31,13 @@ function sum(a,b)
 //It doesn't throw any errors
 sum(1);
 
-
+//Created function sum
 function sum(a,b)
 {
     return a+b;
 
 }
+//Called function sum
 const value=sum(1,3);
 console.log(value);
 
