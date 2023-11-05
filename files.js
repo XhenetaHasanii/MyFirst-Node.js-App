@@ -51,3 +51,10 @@ if(!fs.existsSync('./assets')){
         console.log('File deleted');
     })
 }
+if(!fs.existsSync('./views')){
+fs.mkdir('./views',(err)=>{
+    if(err){
+        console.log(err);
+    }
+    console.log('Directory created');
+})}
