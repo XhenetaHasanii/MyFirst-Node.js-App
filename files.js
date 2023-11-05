@@ -58,3 +58,4 @@ fs.mkdir('./views',(err)=>{
     }
     console.log('Directory created');
 })}
+
