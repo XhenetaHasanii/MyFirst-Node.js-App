@@ -23,6 +23,7 @@ fs.writeFile('./docs/blog2.txt','hello, again',()=>
 });
 
 // directories 
+// Created and deleted directories
 if(!fs.existsSync('./assets')){
     fs.mkdir('./assets',(err)=>{
         if(err)
@@ -40,7 +41,7 @@ if(!fs.existsSync('./assets')){
         }
         )
     }
-   
+    
     // deleting files
     if(fs.existsSync('./docs/deleteme.txt')){
     fs.unlink('./docs/deleteme.txt',(err)=>{
