@@ -7,8 +7,7 @@ const server =http.createServer((req,res)=>{
     // set header content type 
     res.setHeader('Content-Type','text/html');
     res.write('<head><link rel="stylesheet" href="#"</head>')
-    res.write('<p>hello, ninjas</p?>');
-    res.write('<p>hello ,xheni</p>');
+    res.write('<p>hello, ninjas</p>');
     res.end();
 
 });  
