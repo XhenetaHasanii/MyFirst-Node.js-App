@@ -1,9 +1,21 @@
 // include HTTP module
 const http=require('http');
+const _=require('lodash');
 
 // create a server object
  const server =http.createServer((req,res)=>{
-    console.log(req.url , req.method);
+   
+    const num= _.random(0,20);
+    console.log(num);
+   
+    const greet=_.once(()=>
+    {
+        console.log("Hello World");
+    });
+    greet();
+    greet();
+    greet();
+    greet();
 
     let path='./views/';
     switch(req.url){
@@ -20,7 +32,7 @@ case '/about-me':
     res.statusCode=300;
     res.setHeader('Location','/about');
     res.end();*/
-case '/404':
+default:
     path+='404.html';
     res.statusCode=400;
     break;
@@ -48,4 +60,5 @@ case '/404':
 server.listen(3000,'localhost',()=>{
     console.log('listening for request on port 3000');
 });
+
 
