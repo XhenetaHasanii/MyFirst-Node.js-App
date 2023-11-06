@@ -15,10 +15,11 @@ case '/about':
     path+='about.html';
     res.statusCode=200;
 break;
+/*
 case '/about-me':
     res.statusCode=300;
     res.setHeader('Location','/about');
-    res.end();
+    res.end();*/
 case '/404':
     path+='404.html';
     res.statusCode=400;
