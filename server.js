@@ -9,12 +9,15 @@ const http=require('http');
     switch(req.url){
 case '/':
     path+='index.html';
+    res.statusCode=200;
     break;
 case '/about':
     path+='about.html';
+    res.statusCode=200;
 break;
 case '/404':
     path+='404.html';
+    res.statusCode=400;
     break;
 }
 //set header content-type
