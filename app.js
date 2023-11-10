@@ -1,6 +1,9 @@
 // include express
 const express=require('express');
 
+// include morgan
+const morgan=require('morgan');
+
 // express app
 const app=express();
 
@@ -10,6 +13,24 @@ app.listen(3000);
 // register view engine
 app.set('view engine','ejs');
 
+
+app.use(morgan('tiny'));
+
+// create middelware
+/*app.use((req,res,next)=>{
+    console.log('new request made');
+    console.log('host:',req.hostname);
+    console.log('path:',req.path);
+    console.log('method:',req.method);
+    next();
+});
+*/
+
+
+/*app.use((req,res,next)=>{
+    console.log('in the next middelware');
+    next();
+});*/
 
 app.get('/',(req,res)=>{
     //res.send('<p>Home page<p>');
