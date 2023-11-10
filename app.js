@@ -12,11 +12,10 @@ app.set('view engine','ejs');
 
 
 app.get('/',(req,res)=>{
-
     //res.send('<p>Home page<p>');
    // res.sendFile('./views/index.html',{root:__dirname});
 
-   //Create blogs array
+   //Create an blogs array
    const blogs=[{title:'Yoshi finds eggs',snippet:'Lorem ipsum dolor sit amet consectetur'},
    {title:"Mario finds stars", snippet:'Lorem ipsum consectetur'}, {title:'How to defeat browser',snippet:'Lorem ipsum dolor sit amet consectetur'},]; 
 
@@ -24,9 +23,10 @@ app.get('/',(req,res)=>{
 });
 
 app.get('/about',(req,res)=>{
-    //res.send('<p>Home page</p>');
-    // res.sendFile('./views/about.html',{root:__dirname});
-  
+    
+   // res.send('<p>About </p>');
+   //res.sendFile('./views/about.html',{root:__dirname});
+   
    res.render('about',{title:'About'});
 });
 
