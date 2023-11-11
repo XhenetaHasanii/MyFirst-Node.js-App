@@ -1,20 +1,28 @@
 // include express
 const express=require('express');
 
-// include morgan
-const morgan=require('morgan');
+//include mongoose
+const mongoose=require('mongoose');
 
 // express app
 const app=express();
 
-// listen for request
-app.listen(3000);
-
 // register view engine
 app.set('view engine','ejs');
 
+// connecting to Mongodb
+const dbURI='mongodb+srv://netninja:test123@nodejs.6w2lkin.mongodb.net/nodejs?retryWrites=true&w=majority';
+mongoose.connect(dbURI,{ useNewUrlParser: true, useUnifiedTopology: true }).then((result)=>{
+app.listen(3000);}
+).catch((err)=>{
+    console.log(err);
+});
 
-app.use(morgan('tiny'));
+// include morgan
+const morgan=require('morgan');
+
+// Use Morgan middelware to log HTTP requests
+app.use(morgan('dev'));
 
 // create middelware
 /*app.use((req,res,next)=>{
@@ -22,12 +30,11 @@ app.use(morgan('tiny'));
     console.log('host:',req.hostname);
     console.log('path:',req.path);
     console.log('method:',req.method);
+
     next();
 });
-*/
 
-
-/*app.use((req,res,next)=>{
+app.use((req,res,next)=>{
     console.log('in the next middelware');
     next();
 });*/
