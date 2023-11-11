@@ -4,6 +4,8 @@ const express=require('express');
 //include mongoose
 const mongoose=require('mongoose');
 
+const Blog=require('./models/blog');
+
 // express app
 const app=express();
 
@@ -19,10 +21,10 @@ app.listen(3000);}
 });
 
 // include morgan
-const morgan=require('morgan');
+//const morgan=require('morgan');
 
 // Use Morgan middelware to log HTTP requests
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 // create middelware
 /*app.use((req,res,next)=>{
@@ -38,6 +40,15 @@ app.use((req,res,next)=>{
     console.log('in the next middelware');
     next();
 });*/
+
+app.get('/add-blog',(req,res)=>{
+    const blog=new Blog({
+        title:"new blog",
+        snippet:"about my new blog",
+        body: "more about my new blog"
+    });
+    blog.save();
+});
 
 app.get('/',(req,res)=>{
     //res.send('<p>Home page<p>');
