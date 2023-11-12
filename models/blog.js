@@ -1,11 +1,10 @@
 //include mongoose
 const mongoose=require('mongoose');
 
-const Schema=mongoose.Schema;
 
-// defines the structure of the document
-
-const blogSchema= new Schema({
+// Schema defines the structure of the document
+// create blogSchema 
+const blogSchema= new mongoose.Schema({
     title:{
         type:String,
         required:true
@@ -18,8 +17,7 @@ const blogSchema= new Schema({
         type:String,
         required:true
     }
-},{timestamps:true});
+});
 
-// create models
-const Blog=mongoose.model('blogs',blogSchema);
-module.exports=Blog;
+module.exports=mongoose.model('blog',blogSchema);
+
