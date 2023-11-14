@@ -5,7 +5,6 @@ const express=require('express');
 const mongoose=require('mongoose');
 
 const Blog=require('./models/blog');
-const blog = require('./models/blog');
 
 // express app
 const app=express();
@@ -20,29 +19,15 @@ mongoose.connect(dbURI,{ useNewUrlParser: true, useUnifiedTopology: true }).
 then((result)=>{
 app.listen(3000);}
 ).catch((err)=>{
+
     console.log(err);
 });
 
 const morgan=require('morgan');
 
 // Use Morgan middelware to log HTTP requests
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use(express.urlencoded({extended:true}));
-
-// create middelware
-/*app.use((req,res,next)=>{
-    console.log('new request made');
-    console.log('host:',req.hostname);
-    console.log('path:',req.path);
-    console.log('method:',req.method);
-
-    next();
-});
-
-app.use((req,res,next)=>{
-    console.log('in the next middelware');
-    next();
-});*/
 
 /*app.get('/',(req,res)=>{
     //res.send('<p>Home page<p>');
@@ -69,12 +54,15 @@ app.get('/about',(req,res)=>{
 
 //blog routes
 app.get('/blogs',(req,res)=>{
-    Blog.find().then((result)=>{
-        res.render('index',{title:'All blogs',blogs:result});
-
+    Blog.find().sort({createdAt: -1})
+    .then((result)=>{
+        res.render('index',{title:'All Blogs',blogs:result})
     })
+        .catch((err)=>{
+            console.log(err);
+        });
 
-})
+    });
 app.get('/blogs/create',(req,res)=>{
     res.render('create', { title: 'Create a new Blog' });
 });
@@ -93,10 +81,10 @@ app.use((req,res)=>{
 //retrieve all the blogs from the collection
 app.get('/all-blogs', (req,res)=>{
  
-    blog.find().
+    Blog.find().
     then((result)=>{
         
-        res.render('index')
+        res.render('index');
     })
     .catch((err)=>{
             console.log(err);
@@ -131,9 +119,10 @@ app.get('/add-blog',(req,res)=>{
     });
 });
 
-app.post('/',(req,res)=>
+
+app.post('/blogs',(req,res)=>
 {
-const blog=new Blog(req,body)});
+const blog=new Blog(req.body)});
 blog.save
 .then((result)=>
 {
@@ -141,4 +130,5 @@ res.redirect('/').catch((er)=>{
     console.log(err);
 })
 });
+
 
