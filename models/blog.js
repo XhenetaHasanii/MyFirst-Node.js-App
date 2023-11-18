@@ -1,24 +1,18 @@
-//include mongoose
 const mongoose=require('mongoose');
 
-
-// Schema defines the structure of the document
-// create blogSchema 
-const blogSchema= new mongoose.Schema({
+const blogSchema=new mongoose.Schema({
     title:{
-        type:String,
-        required:true
+        type:"String",
+        required: true
     },
     snippet:{
-        type:String,
+        type:"String",
         required:true
     },
     body:{
-        type:String,
+        type:"String",
         required:true
     }
-});
-
-const Blog=mongoose.model('blog',blogSchema);
+})
+const Blog=mongoose.model('Blog', blogSchema);
 module.exports=Blog;
-
