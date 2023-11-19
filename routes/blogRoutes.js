@@ -1,28 +1,34 @@
-const express = require('express')
+const express = require('express');
 
-const router = express.Router()
-const Blog = require('../model/blog')
+const router = express.Router();
+const Blog = require('../model/blog');
 
 
 //Getting all
 router.get('/', async (req, res) => {
     try {
-        const blogs = await Blog.find()
-        res.send(blogs);
+        const blogs = await Blog.find();
+        res.json(blogs);
     }
     catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ message: err.message });
     }
 })
 
 //Getting One
-router.get('/:id', (req, res) => {
-    res.send('hello world');
+router.get('/:id', getBlog, (req, res) => {
+    res.send(res.blog.name);
 
+});
+//Getting One
+router.get('/:id', (req,res)=>{
+    res.json({requestParams:req.params,requestQuery:req.query});
+    
 })
+
 // Creating one
 router.post('/', async (req, res) => {
-console.log(req);
+    console.log(req.body);
     const blog = new Blog({
         title: req.body.title,
         snippet: req.body.snippet,
@@ -45,6 +51,21 @@ router.patch('/', (req, res) => {
 router.delete('/', (req, res) => {
 
 })
+
+async function getBlog(req, res, nex) {
+    let blog
+    try {
+        const blog = await Blog.findById(req.param.id);
+        if (blog == null) {
+            return res.status(404).json({ message: 'Can not find blog' });
+        }
+    }
+    catch (err) {
+
+        res.status(500).json({ message: err.message });
+    }
+    res.blog = blog; next();
+}
 module.exports = router;
 
 
