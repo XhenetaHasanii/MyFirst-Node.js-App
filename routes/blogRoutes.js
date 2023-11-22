@@ -45,16 +45,16 @@ router.post('/', async (req, res) => {
 })
 
 // Updating One
-router.patch('/', getBlog, async(req, res) => {
-    if(req.body.title!=null){
-        req.blog.title=req.body.title;
+router.patch('/', getBlog, async (req, res) => {
+    if (req.body.title != null) {
+        req.blog.title = req.body.title;
     }
-    try{
-        const updateBlog=await res.blog.save();
+    try {
+        const updateBlog = await res.blog.save();
         res.json(updateBlog);
 
-    }catch(error){
-        res.status(500).json({message:error.message});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
 
     }
 
@@ -65,11 +65,9 @@ router.delete('/:id', getBlog, async (req, res) => {
     try {
         await res.blog.remove();
         res.json({ message: 'Deleted blog' });
-
     }
     catch (error) {
         res.status(500).json({ message: error.message });
-
     }
 })
 

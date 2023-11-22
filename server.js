@@ -5,7 +5,7 @@ const express = require('express');
 
 // create server 
 const app = express();
-app.use(express.json())
+app.use(express.json());
 // include Mongoose
 const mongoose = require('mongoose');
 
