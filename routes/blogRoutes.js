@@ -45,30 +45,12 @@ router.post('/', async (req, res) => {
 })
 
 // Updating One
-router.patch('/', getBlog, async (req, res) => {
-    if (req.body.title != null) {
-        req.blog.title = req.body.title;
-    }
-    try {
-        const updateBlog = await res.blog.save();
-        res.json(updateBlog);
-
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-
-    }
+router.patch('/', (req, res) => {
 
 })
 //Deleting One 
+router.delete('/', (req, res) => {
 
-router.delete('/:id', getBlog, async (req, res) => {
-    try {
-        await res.blog.remove();
-        res.json({ message: 'Deleted blog' });
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
 })
 
 async function getBlog(req, res, next) {
