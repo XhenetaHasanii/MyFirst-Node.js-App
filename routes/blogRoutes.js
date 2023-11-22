@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const Blog = require('../model/blog');
+const { update } = require('lodash');
 
 
 //Getting all
@@ -21,9 +22,9 @@ router.get('/:id', getBlog, (req, res) => {
 
 });
 //Getting One
-router.get('/:id', (req,res)=>{
-    res.json({requestParams:req.params,requestQuery:req.query});
-    
+router.get('/:id', (req, res) => {
+    res.json({ requestParams: req.params, requestQuery: req.query });
+
 })
 
 // Creating one
@@ -44,15 +45,35 @@ router.post('/', async (req, res) => {
 })
 
 // Updating One
-router.patch('/', (req, res) => {
+router.patch('/', getBlog, async(req, res) => {
+    if(req.body.title!=null){
+        req.blog.title=req.body.title;
+    }
+    try{
+        const updateBlog=await res.blog.save();
+        res.json(updateBlog);
+
+    }catch(error){
+        res.status(500).json({message:error.message});
+
+    }
 
 })
 //Deleting One 
-router.delete('/', (req, res) => {
 
+router.delete('/:id', getBlog, async (req, res) => {
+    try {
+        await res.blog.remove();
+        res.json({ message: 'Deleted blog' });
+
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+
+    }
 })
 
-async function getBlog(req, res, nex) {
+async function getBlog(req, res, next) {
     let blog
     try {
         const blog = await Blog.findById(req.param.id);
@@ -64,8 +85,10 @@ async function getBlog(req, res, nex) {
 
         res.status(500).json({ message: err.message });
     }
-    res.blog = blog; next();
+    res.blog = blog;
+    next();
 }
+
 module.exports = router;
 
 
